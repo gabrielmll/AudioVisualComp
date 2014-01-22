@@ -1,49 +1,31 @@
 PImage img;  // variable for an image
 
-PVector v1, v2, v3, v4;  // shape vector variables
-PVector position = new PVector(3, 3);  // position of the image
-PVector nv1, nv2, nv3, nv4;  // "new" shape vector variables
-
-PVector move;  // vector to move the image by being added to position
+PVector[] v = new PVector[6];  // shape vector variables stored in an array
 
 void setup() {
-  size(1024, 1024, P3D);  // window size in a 3D engine
+  size(800, 800, P3D);  // window size in a 3D engine
 
   img = loadImage("arara.jpg");  // loading an image to the image variable
 
     // initiate each vector with an value
-  v1 = new PVector(0, 0);
-  v2 = new PVector(0, 200);
-  v3 = new PVector(200, 200);
-  v4 = new PVector(200, 0);
+  v[0] = new PVector(0, 0);
+  v[1] = new PVector(0, 200);
+  v[2] = new PVector(200, 200);
+  v[3] = new PVector(200, 0);
 
   textureMode(NORMAL);
+  
+  beginShape(TRIANGLES);
+  texture(img);  // use the image as texture of this shape
+  // declare the shape vertices using the vector
+  vertex(v[0].x, v[0].y, 0, 0);
+  vertex(v[1].x, v[1].y, 0, 1);
+  vertex(v[2].x, v[2].y, 1, 1);
+  vertex(v[3].x, v[3].y, 1, 0);
+  endShape(CLOSE);
 }
 
 // "infinite loop"
 void draw() {
-  
-  float speed = 1;  // movement speed
-  move = new PVector(mouseX - position.x, mouseY - position.y);
-  move.normalize();  // normilize to get the direction
-  move.mult(speed);  // multiply speed to get a velocity
-  
-  // create each nv as a sum of position and the image vectors
-  nv1 = PVector.add(position, v1);
-  nv2 = PVector.add(position, v2);
-  nv3 = PVector.add(position, v3);
-  nv4 = PVector.add(position, v4);
-
-  beginShape();
-  texture(img);  // use the image as texture of this shape
-  // declare the shape vertices using the vector
-  vertex(nv1.x, nv1.y, 0, 0);
-  vertex(nv2.x, nv2.y, 0, 1);
-  vertex(nv3.x, nv3.y, 1, 1);
-  vertex(nv4.x, nv4.y, 1, 0);
-  endShape(CLOSE);
-  
-  // move the image by adding "move" and "position"
-  position.add(move);
 }
 
