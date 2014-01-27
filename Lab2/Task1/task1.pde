@@ -1,3 +1,4 @@
+// comment
 //----- Declaring global variables. -----
 
 PVector position; //Variable for the position of the drawn squares.
