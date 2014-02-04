@@ -2,13 +2,15 @@
   Extension 5. 
  */
 
-PVector v[] = new PVector[400];  // shape vector variables
-int quad = 50;  // size of each quadrant
+PVector v[] = new PVector[1600];  // shape vector variables
+int quad = 35;  // size of each quadrant
+
+int numOfQuads = 20; // Variable for resolution
 
 void setup() {
   size(1000, 600, P3D);  // window size in a 3D engine
 
-  translate(250, 200, -150);  // moving the screen
+  translate(150, 350, -550);  // moving the screen
 
 
   // initiate each quadrant vector with a value
@@ -21,22 +23,25 @@ void setup() {
    */
 
   int i = 0; // vertice index
-  int Y = 1;
+  int Y = 0;
   // loop for x coordinate
-  for (int x = 0; x < 10; x++) {
+  for (int z = 0; z < numOfQuads; z++) {
     // loop for z coordinate
-    for (int z = 0; z < 10; z++) {
+    for (int x = 0; x < numOfQuads; x++) {
       // quad vector 1
       v[i] = new PVector(x*quad, heightY(Y), z*quad);
       // quad vector 2
-      v[i+1] = new PVector((x+1)*quad, heightY(Y), z*quad);
+      v[i+1] = new PVector((x+1)*quad, heightY(Y+100), z*quad);
       // quad vector 3
-      v[i+2] = new PVector((x+1)*quad, heightY(Y), (z+1)*quad);
+      v[i+2] = new PVector((x+1)*quad, heightY(Y+100), (z+1)*quad);
       // quad vector 4
       v[i+3] = new PVector(x*quad, heightY(Y), (z+1)*quad);
-      
+
       i+=4;
-      Y=(Y % 10)+1;
+
+      Y+=100;
+      if (Y >= 2000)
+        Y = 0;
     }
   }
 
@@ -45,15 +50,16 @@ void setup() {
   beginShape(QUAD);
 
   // declare the shape vertices using the vectors
-  for (int k = 0; k < 400; k++) {
+  for (int k = 0; k < numOfQuads*numOfQuads*4; k++) {
     vertex(v[k].x, v[k].y, v[k].z);
   }
 
   endShape();
 }
 
-float heightY(int i)
+float heightY(float ang)
 {
-  return noise(0.2)*height;
+//  return 50*sin(radians(ang));
+  return noise(ang)*100;
 }
 
