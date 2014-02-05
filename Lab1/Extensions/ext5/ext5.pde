@@ -10,7 +10,8 @@ int numOfQuads = 20; // Variable for resolution
 void setup() {
   size(1000, 600, P3D);  // window size in a 3D engine
 
-  translate(150, 350, -550);  // moving the screen
+  translate(150, 450, -550);  // moving the 
+  //translate(width/2, 350, 0);
 
 
   // initiate each quadrant vector with a value
@@ -29,13 +30,13 @@ void setup() {
     // loop for z coordinate
     for (int x = 0; x < numOfQuads; x++) {
       // quad vector 1
-      v[i] = new PVector(x*quad, heightY(Y), z*quad);
+      v[i] = new PVector(x*quad, heightY(x*quad, z*quad), z*quad);
       // quad vector 2
-      v[i+1] = new PVector((x+1)*quad, heightY(Y+100), z*quad);
+      v[i+1] = new PVector((x+1)*quad, heightY((x+1)*quad, z*quad), z*quad);
       // quad vector 3
-      v[i+2] = new PVector((x+1)*quad, heightY(Y+100), (z+1)*quad);
+      v[i+2] = new PVector((x+1)*quad, heightY((x+1)*quad, (z+1)*quad), (z+1)*quad);
       // quad vector 4
-      v[i+3] = new PVector(x*quad, heightY(Y), (z+1)*quad);
+      v[i+3] = new PVector(x*quad, heightY(x*quad, (z+1)*quad), (z+1)*quad);
 
       i+=4;
 
@@ -57,9 +58,10 @@ void setup() {
   endShape();
 }
 
-float heightY(float ang)
+float heightY(float y1, float y2)
 {
-//  return 50*sin(radians(ang));
-  return noise(ang)*100;
+  println(noise(y1, y2)*100);
+ // return 50*sin(radians(ang));
+  return noise(y1, y2)*10;
 }
 
