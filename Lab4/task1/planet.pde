@@ -3,17 +3,17 @@ class Planet {
   float angle = 0;
   float angleSpeed;
   PVector pos;
-
   Planet parent;
-
   ArrayList<Planet> sons = new ArrayList<Planet>();
+  PImage img;
 
-  Planet (float r, float a, PVector p, Planet par) {
+  Planet (float r, float a, PVector p, Planet par, String imageURL) {
     radius = r;
     angleSpeed = a;
     pos = p;
-    //rotationAxis = rotAx;
     parent = par;
+    
+    img = loadImage(imageURL);
   }
 
   void rotatePlanet() {  
@@ -38,14 +38,19 @@ class Planet {
     sons.add(son);
   }
 
-  /* Drawing */
+
+  /* ------------------------
+  Design area
+     - draw
+     - texture
+  ---------------------------*/
 
   void drawPlanet () {
     // start drawing the shape
     
     textureMode(NORMAL);
     beginShape();
-    //texture(img);
+    texture(img);
     // each vertice of the shape
     for (int i = 0; i <= 360; i++) {
       // mapping the image for each point of the circle
