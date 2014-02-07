@@ -48,6 +48,7 @@ class Planet {
   void drawPlanet () {
     // start drawing the shape
     
+    noStroke();
     textureMode(NORMAL);
     beginShape();
     texture(img);

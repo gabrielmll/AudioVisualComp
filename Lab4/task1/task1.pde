@@ -1,5 +1,7 @@
 float speed = 0.01;
 
+Stars stars;
+
 Planet sun;
 
 Planet mercury;
@@ -16,7 +18,7 @@ Planet europa;
 void setup () {
   size (1000, 700, P3D);
 
-
+  stars = new Stars(200,2); // number of stars, star size
 
   sun = new Planet(50, 0.001, new PVector(0, 0), null, "sun.jpg");
 
@@ -31,6 +33,7 @@ void setup () {
   deimos = new Planet(2.5, 4.3*speed, new PVector(15, 15), mars, "moon.jpg");
   europa = new Planet(3, 1*speed, new PVector(20, 20), jupter, "moon.jpg");
 
+  stars.drawStars(); //Set stars positions.
 
   sun.giveBirth(mercury);
   sun.giveBirth(venus);
@@ -49,6 +52,7 @@ void setup () {
 void draw() {
 
   background (0);
+  stars.colourStars(); //Draw stars.
   translate(width/2, height/2);
   //rotateX(PI/4.0);
   sun.rotatePlanet();
