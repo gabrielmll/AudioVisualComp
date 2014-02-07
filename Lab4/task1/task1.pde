@@ -19,13 +19,13 @@ void setup () {
 
 
   sun = new Planet(50, 0.001, new PVector(0, 0), null, "sun.jpg");
-  
+
   mercury = new Planet(5, 4*speed, new PVector(50, 50), sun, "mercury.jpg");
   venus = new Planet(10, 1.2*speed, new PVector(70, 70), sun, "venus.jpg");
   earth = new Planet(10, 1*speed, new PVector(95, 95), sun, "earth.jpg");
   mars = new Planet(7.5, 0.5*speed, new PVector(130, 130), sun, "mars.jpg");
   jupter = new Planet(20, 0.09*speed, new PVector(170, 170), sun, "jupter.jpg");
-  
+
   moon = new Planet(2.5, 4*speed, new PVector(15, 15), earth, "moon.jpg");
   phobos = new Planet(2.5, 2*speed, new PVector(10, 10), mars, "moon.jpg");
   deimos = new Planet(2.5, 4.3*speed, new PVector(15, 15), mars, "moon.jpg");
@@ -39,10 +39,10 @@ void setup () {
   sun.giveBirth(jupter);
 
   earth.giveBirth(moon);
-  
+
   mars.giveBirth(phobos);
   mars.giveBirth(deimos);
-  
+
   jupter.giveBirth(europa);
 }
 
@@ -50,6 +50,7 @@ void draw() {
 
   background (0);
   translate(width/2, height/2);
+  //rotateX(PI/4.0);
   sun.rotatePlanet();
 }
 
