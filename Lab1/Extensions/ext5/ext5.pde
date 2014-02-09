@@ -62,6 +62,6 @@ float heightY(float y1, float y2)
 {
   println(noise(y1, y2)*100);
  // return 50*sin(radians(ang));
-  return noise(y1, y2)*10;
+  return noise(y1, y2)*15;
 }
 
