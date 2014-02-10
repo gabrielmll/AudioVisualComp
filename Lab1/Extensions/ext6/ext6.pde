@@ -1,5 +1,5 @@
 /*
-  Extension 5. 
+  Extension 6. 
  */
 
 PVector v[] = new PVector[1600];  // shape vector variables
@@ -7,9 +7,21 @@ int quad = 35;  // size of each quadrant
 
 int numOfQuads = 20; // Variable for resolution
 
+
+float bx;
+float by;
+int boxSize = 75;
+boolean overBox = false;
+boolean locked = false;
+float xOffset = 0.0; 
+float yOffset = 0.0; 
+
 void setup() {
   size(1000, 600, P3D);  // window size in a 3D engine
+}
 
+void draw() {
+  background(255);
   translate(150, 450, -550);  // moving the 
   //translate(width/2, 350, 0);
 
@@ -24,7 +36,6 @@ void setup() {
    */
 
   int i = 0; // vertice index
-  int Y = 0;
   // loop for x coordinate
   for (int z = 0; z < numOfQuads; z++) {
     // loop for z coordinate
@@ -39,10 +50,6 @@ void setup() {
       v[i+3] = new PVector(x*quad, heightY(x*quad, (z+1)*quad), (z+1)*quad);
 
       i+=4;
-
-      Y+=100;
-      if (Y >= 2000)
-        Y = 0;
     }
   }
 
@@ -56,12 +63,54 @@ void setup() {
   }
 
   endShape();
+  
+  
+  
+    // Test if the cursor is over the box 
+  if (mouseX > bx-boxSize && mouseX < bx+boxSize && 
+      mouseY > by-boxSize && mouseY < by+boxSize) {
+    overBox = true;  
+    if(!locked) { 
+      stroke(255); 
+      fill(153);
+    } 
+  } else {
+    stroke(153);
+    fill(153);
+    overBox = false;
+  }
+  
+  // Draw the box
+  rect(bx, by, boxSize, boxSize);
 }
 
 float heightY(float y1, float y2)
 {
-  println(noise(y1, y2)*100);
- // return 50*sin(radians(ang));
-  return noise(y1, y2)*20;
+  // return 50*sin(radians(ang));
+  return noise(y1, y2)*15;
+}
+
+
+void mousePressed() {
+  if (overBox) { 
+    locked = true; 
+    fill(255, 255, 255);
+  } 
+  else {
+    locked = false;
+  }
+  xOffset = mouseX-bx; 
+  yOffset = mouseY-by;
+}
+
+void mouseDragged() {
+  if (locked) {
+    bx = mouseX-xOffset; 
+    by = mouseY-yOffset;
+  }
+}
+
+void mouseReleased() {
+  locked = false;
 }
 

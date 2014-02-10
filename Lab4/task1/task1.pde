@@ -55,6 +55,7 @@ void draw() {
   stars.colourStars(); //Draw stars.
   translate(width/2, height/2);
   //rotateX(PI/4.0);
+  
   sun.rotatePlanet();
 }
 
