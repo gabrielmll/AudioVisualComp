@@ -7,14 +7,14 @@ int quad = 35;  // size of each quadrant
 
 int numOfQuads = 20; // Variable for resolution
 
+// translate variables
+int transX = 150;
+int transY = 450;
+int transZ = -550;
 
-float bx;
-float by;
-int boxSize = 75;
-boolean overBox = false;
-boolean locked = false;
-float xOffset = 0.0; 
-float yOffset = 0.0; 
+int mouseRange = 10;  // acceptable distance for "mouse over vertice"
+float mouse3DX = 0;
+float mouse3DY = 0;
 
 void setup() {
   size(1000, 600, P3D);  // window size in a 3D engine
@@ -22,7 +22,7 @@ void setup() {
 
 void draw() {
   background(255);
-  translate(150, 450, -550);  // moving the 
+  translate(transX, transY, transZ);  // moving the 
   //translate(width/2, 350, 0);
 
 
@@ -59,58 +59,35 @@ void draw() {
 
   // declare the shape vertices using the vectors
   for (int k = 0; k < numOfQuads*numOfQuads*4; k++) {
+
     vertex(v[k].x, v[k].y, v[k].z);
   }
 
   endShape();
-  
-  
-  
-    // Test if the cursor is over the box 
-  if (mouseX > bx-boxSize && mouseX < bx+boxSize && 
-      mouseY > by-boxSize && mouseY < by+boxSize) {
-    overBox = true;  
-    if(!locked) { 
-      stroke(255); 
-      fill(153);
-    } 
-  } else {
-    stroke(153);
-    fill(153);
-    overBox = false;
+
+  for (int k = 0; k < numOfQuads*numOfQuads*4; k++) {
+    /*    if ((mouseX > v[k].x + transX - mouseRange) &&
+     (mouseX < v[k].x + transX + mouseRange) &&
+     (mouseY > v[k].y + transY - mouseRange) &&
+     (mouseY < v[k].y + transY + mouseRange)) 
+     */
+    if ((mouseX > v[k].x + transX - mouseRange) &&
+      (mouseX < v[k].x + transX + mouseRange) &&
+      (mouseY > v[k].z + transZ - mouseRange) &&
+      (mouseY < v[k].z + transZ + mouseRange)) {
+      fill(255, 0, 0);
+      pushMatrix();
+      translate(v[k].x, v[k].y, v[k].z);
+      ellipse(0, 0, 10, 10);
+      noFill();
+      popMatrix();
+    }
   }
-  
-  // Draw the box
-  rect(bx, by, boxSize, boxSize);
 }
 
 float heightY(float y1, float y2)
 {
   // return 50*sin(radians(ang));
   return noise(y1, y2)*15;
-}
-
-
-void mousePressed() {
-  if (overBox) { 
-    locked = true; 
-    fill(255, 255, 255);
-  } 
-  else {
-    locked = false;
-  }
-  xOffset = mouseX-bx; 
-  yOffset = mouseY-by;
-}
-
-void mouseDragged() {
-  if (locked) {
-    bx = mouseX-xOffset; 
-    by = mouseY-yOffset;
-  }
-}
-
-void mouseReleased() {
-  locked = false;
 }
 
