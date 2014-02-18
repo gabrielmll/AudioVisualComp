@@ -1,4 +1,5 @@
 class Planet {
+  String name;
   float radius;
   float angle = 0;
   float angleSpeed;
@@ -7,13 +8,14 @@ class Planet {
   ArrayList<Planet> sons = new ArrayList<Planet>();
   PImage img;
 
-  Planet (float r, float a, PVector p, Planet par, String imageURL) {
+  Planet (float r, float a, PVector p, Planet par, String imageURL, String n) {
     radius = r;
     angleSpeed = a;
     pos = p;
     parent = par;
     
     img = loadImage(imageURL);
+    name = n;
   }
 
   void rotatePlanet() {  
