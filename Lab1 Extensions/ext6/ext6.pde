@@ -12,9 +12,9 @@ int transX = 150;
 int transY = 450;
 int transZ = -550;
 
-int mouseRange = 10;  // acceptable distance for "mouse over vertice"
-float mouse3DX = 0;
-float mouse3DY = 0;
+int mouseRange = 5;  // acceptable distance for "mouse over vertice"
+float screen2DX = 0;
+float screen2DY = 0;
 
 void setup() {
   size(1000, 600, P3D);  // window size in a 3D engine
@@ -66,15 +66,20 @@ void draw() {
   endShape();
 
   for (int k = 0; k < numOfQuads*numOfQuads*4; k++) {
-    /*    if ((mouseX > v[k].x + transX - mouseRange) &&
+
+    screen2DX = screenX(v[k].x, v[k].y, v[k].z);
+    screen2DY = screenY(v[k].x, v[k].y, v[k].z);
+    /*    
+     if ((mouseX > v[k].x + transX - mouseRange) &&
      (mouseX < v[k].x + transX + mouseRange) &&
      (mouseY > v[k].y + transY - mouseRange) &&
      (mouseY < v[k].y + transY + mouseRange)) 
      */
-    if ((mouseX > v[k].x + transX - mouseRange) &&
-      (mouseX < v[k].x + transX + mouseRange) &&
-      (mouseY > v[k].z + transZ - mouseRange) &&
-      (mouseY < v[k].z + transZ + mouseRange)) {
+    if ((mouseX > screen2DX - mouseRange) &&
+      (mouseX < screen2DX + mouseRange) &&
+      (mouseY > screen2DY - mouseRange) &&
+      (mouseY < screen2DY + mouseRange)) 
+    {
       fill(255, 0, 0);
       pushMatrix();
       translate(v[k].x, v[k].y, v[k].z);
