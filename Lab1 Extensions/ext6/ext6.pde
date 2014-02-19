@@ -17,6 +17,8 @@ int transZ = -550;
 int mouseRange = 5;  // acceptable distance for "mouse over vertice"
 float screen2DX = 0;
 float screen2DY = 0;
+boolean mouseClick = false;
+int[] selectedVertice = new int[2];
 
 void setup() {
   size(1000, 600, P3D);  // window size in a 3D engine
@@ -69,7 +71,17 @@ void draw() {
 
   endShape();
 
-  selectVertice();
+  if (!mouseClick)
+    selectVertice();
+
+  changeHeight();
+}
+
+void changeHeight() {
+  if (mouseClick == true) {
+    valueY[selectedVertice[0]][selectedVertice[1]] = mouseY + transZ;
+    //valueY[2][1] = mouseY + transZ;
+  }
 }
 
 void selectVertice() {
@@ -90,10 +102,28 @@ void selectVertice() {
       ellipse(0, 0, 5, 5);
       noFill();
       popMatrix();
-      if (mousePressed) {
 
-        valueY[18][18] = mouseY + transZ;
+      if (mousePressed) {
+        mouseClick = true;
+        verticeTranslator(k);
       }
+    }
+  }
+}
+
+void verticeTranslator(int k) {
+  // discover the vertice
+  // loop for x coordinate
+  int aux = 0;
+  for (int z = 0; z <= numOfQuads; z++) {
+    // loop for z coordinate
+    for (int x = 0; x <= numOfQuads; x++) {
+      if (aux == k) {
+        selectedVertice[0] = z;
+        selectedVertice[1] = x;
+        println("aux: "+aux+" "+z+"|"+x);
+      }
+      aux++;
     }
   }
 }
@@ -102,7 +132,7 @@ float heightY(int x, int z) // x & z works as an index
 {
   // return 50*sin(radians(ang));
   //return noise(x, z)*15;
-  return valueY[x][z];
+  return valueY[z][x];
 }
 
 // sets the whole matrix "valueY" to 0
@@ -112,5 +142,9 @@ void initHeightY() {
       valueY[i][j] = 0;
     }
   }
+}
+
+void mouseReleased() {
+  mouseClick = false;
 }
 
