@@ -5,20 +5,24 @@
 PVector v[] = new PVector[1600];  // shape vector variables
 int quad = 35;  // size of each quadrant
 
-int numOfQuads = 20; // Variable for resolution
+int numOfQuads = 2; // Variable for resolution
 
 float valueY[][] = new float[numOfQuads+1][numOfQuads+1];  // matrix for vertice height
 
 // translate variables
+/*int transX = 150;
+ int transY = 450;
+ int transZ = -550;
+ */
 int transX = 150;
 int transY = 450;
-int transZ = -550;
+int transZ = -50;
 
 int mouseRange = 5;  // acceptable distance for "mouse over vertice"
-float screen2DX = 0;
-float screen2DY = 0;
-boolean mouseClick = false;
-int[] selectedVertice = new int[2];
+float screen2DX = 0;  // Interpretate 2D X-click on 3D enviornment
+float screen2DY = 0; // Interpretate 2D Y-click on 3D enviornment
+boolean mouseClick = false; // If mouse is clicked, than true
+int[] selectedVertice = new int[2]; // Which vertice is selected?
 
 void setup() {
   size(1000, 600, P3D);  // window size in a 3D engine
@@ -77,6 +81,7 @@ void draw() {
   changeHeight();
 }
 
+// Mouse is changing the vertice height
 void changeHeight() {
   if (mouseClick == true) {
     valueY[selectedVertice[0]][selectedVertice[1]] = mouseY + transZ;
@@ -84,6 +89,7 @@ void changeHeight() {
   }
 }
 
+// Use the mouse to select a vertice
 void selectVertice() {
 
   for (int k = 0; k < numOfQuads*numOfQuads*4; k++) {
@@ -105,29 +111,36 @@ void selectVertice() {
 
       if (mousePressed) {
         mouseClick = true;
-        verticeTranslator(k);
+        translateVertice(k); // who is 'k' vertice in the matrix?
       }
     }
   }
 }
 
-void verticeTranslator(int k) {
-  // discover the vertice
-  // loop for x coordinate
-  int aux = 0;
-  for (int z = 0; z <= numOfQuads; z++) {
-    // loop for z coordinate
-    for (int x = 0; x <= numOfQuads; x++) {
-      if (aux == k) {
-        selectedVertice[0] = z;
-        selectedVertice[1] = x;
-        println("aux: "+aux+" "+z+"|"+x);
-      }
-      aux++;
-    }
+// Interpretate Selected Vertice.
+// The height is stored in a matrix[x][z], while the PVectors are stored linearly.
+// This function will convert the linear to the matrix for changin y-height
+void translateVertice(int k) {
+  int vertRow = k/(4*numOfQuads); // Which row are we talking about?
+  int vertCol = (k/4) % numOfQuads;  // Which column are we talking about?
+  int vertPos = k % 4; // TOP or BOTTOM || LEFT or RIGHT
+  // based on position and row, point the 1st matrix value
+  if (vertPos == 0 || vertPos == 1) {
+    selectedVertice[0] = vertRow;
+  }
+  else {
+    selectedVertice[0] = vertRow + 1;
+  }
+  // based on position and column, point the 2nd matrix value
+  if (vertPos == 0 || vertPos == 3) {
+    selectedVertice[1] = vertCol;
+  }
+  else {
+    selectedVertice[1] = vertCol + 1;
   }
 }
 
+// Read the vertice height from the stored height matrix
 float heightY(int x, int z) // x & z works as an index
 {
   // return 50*sin(radians(ang));
