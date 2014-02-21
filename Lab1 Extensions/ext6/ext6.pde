@@ -5,19 +5,16 @@
 PVector v[] = new PVector[1600];  // shape vector variables
 int quad = 35;  // size of each quadrant
 
-int numOfQuads = 2; // Variable for resolution
+int numOfQuads = 20; // Variable for resolution
 
 float valueY[][] = new float[numOfQuads+1][numOfQuads+1];  // matrix for vertice height
 
-// translate variables
-/*int transX = 150;
- int transY = 450;
- int transZ = -550;
- */
+// translate screen variables
 int transX = 150;
 int transY = 450;
-int transZ = -50;
+int transZ = -550;
 
+// mouse event variables
 int mouseRange = 5;  // acceptable distance for "mouse over vertice"
 float screen2DX = 0;  // Interpretate 2D X-click on 3D enviornment
 float screen2DY = 0; // Interpretate 2D Y-click on 3D enviornment
@@ -82,10 +79,12 @@ void draw() {
 }
 
 // Mouse is changing the vertice height
+// TODO: Still need to find the relative mouseY
 void changeHeight() {
   if (mouseClick == true) {
-    valueY[selectedVertice[0]][selectedVertice[1]] = mouseY + transZ;
-    //valueY[2][1] = mouseY + transZ;
+    //valueY[selectedVertice[0]][selectedVertice[1]] = -screenY(v[k].x, (height - mouseY) - transY, v[k].z);
+    //valueY[selectedVertice[0]][selectedVertice[1]] = screenY(mouseX, mouseY, -selectedVertice[1]*numOfQuads*quad);
+    valueY[selectedVertice[0]][selectedVertice[1]] = mouseY - 500;
   }
 }
 
@@ -157,6 +156,7 @@ void initHeightY() {
   }
 }
 
+// when mouse is released, finish height edition state
 void mouseReleased() {
   mouseClick = false;
 }
