@@ -17,7 +17,7 @@ float angle = 0;
 int spriteTimer = 0; // Variable for sprite changing timer
 
 void setup() {
-  size(1024, 1024, P3D);  // window size in a 3D engine
+  size(1024, 600, P3D);  // window size in a 3D engine
 
   sprite1 = loadImage("sprite1.png");  // loading the bird image to the variable
   sprite2 = loadImage("sprite2.png");  // loading the bird image to the variable
@@ -29,13 +29,13 @@ void setup() {
   v3 = new PVector(100, 100);
   v4 = new PVector(100, -100);
 
-  textureMode(NORMAL);
+  textureMode(NORMAL); mouseX
 }
 
 // "infinite loop"
 void draw() {
   background(255);
-  image(bg, 0, 0);
+  image(bg, 0, -200);
 
   updateValues();
   drawImg();
@@ -60,6 +60,12 @@ void updateValues() {
 
   location.add(direction);
 
+  println(direction);
+  if ((direction.x < 1) && (direction.x > -1) &&
+    (direction.y < 1) && (direction.y > -1)) {
+    direction.x = 0;
+    direction.y = 0;
+  }
   angle = direction.heading();
 }
 
@@ -92,3 +98,4 @@ void drawImg() {
     spriteTimer = 0; // Resets timer when sprite reaches maximum time.
   }
 }
+
