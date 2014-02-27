@@ -12,15 +12,15 @@ Movie myMovie; //Variable for storing the video.
 
 void setup () {
   
+  size(1024,768); //Setting the window size.
+  
   position = new PVector(-1,-2); //Initializing position vector.
   velocity = new PVector(1,2); //Initializing velocity vector.
   scaling = new PVector(0.1,0.1); //Initializing scaling vector.
   scalingSpeed = new PVector(0.001,0.001); //Initializing scalingSpeed vector.
   
-  myMovie = new Movie(this, "hydepark.mp4"); //Loading the video to myMovie.
+  myMovie = new Movie(this, "small.mp4"); //Loading the video to myMovie.
   myMovie.loop(); //Plays the movie continuously, restarting it when it's over.
-  
-  size(1024,768); //Setting the window size.
   
 }
 

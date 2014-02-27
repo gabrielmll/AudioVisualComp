@@ -1,3 +1,5 @@
+/* This program draws an image with a tint on it that simulates a sepia effect. */
+
 //----- Declaring global variables. -----
 
 PImage myImage; //Variable for storing the image.

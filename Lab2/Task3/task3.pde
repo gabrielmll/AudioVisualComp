@@ -1,3 +1,6 @@
+/* This program does the same as task 2 but instead of drawing new squares it draws the same image but
+bigger and with a blur effect each time it runs.*/
+
 //----- Declaring global variables. -----
 
 PVector position; //Variable for the position of the drawn images.

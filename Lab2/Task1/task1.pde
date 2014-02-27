@@ -1,3 +1,6 @@
+/* This program draws a new square each time it runs in a diferent place using translate
+after adding the variable velocity to the variable position. */
+
 //----- Declaring global variables. -----
 
 PVector position; //Variable for the position of the drawn squares.

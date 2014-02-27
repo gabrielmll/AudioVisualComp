@@ -1,3 +1,5 @@
+/*This program gradually applies a sepia tone effect by increasing the tint opacity. */
+
 //----- Declaring global variables. -----
 
 PImage myImage; //Variable for storing the image.

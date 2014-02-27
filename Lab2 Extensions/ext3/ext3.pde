@@ -1,3 +1,5 @@
+/* This program demonstrates a bouncing box that inverts its movement direction if it hits one of the edges of the window*/
+
 //----- Declaring global variables. -----
 
 PVector position; //Variable for the position of the drawn squares.
@@ -25,4 +27,3 @@ void draw () {
   if (position.y > height-100 || position.y < 0) //Invert direction of movement if the square vertical position is bigger then the height of window or less then 0.
     velocity.y = velocity.y*-1; //Invert speed to invert direction of movement.
 }
-

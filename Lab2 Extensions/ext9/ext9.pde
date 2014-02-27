@@ -1,10 +1,15 @@
 // Code developed based on 2-D Transformations tutorial on Processing's website. Link: http://processing.org/tutorials/transform2d/
 
+/* This program draws a robot with articulated arms that can be moved automatically or by input.
+Type E to toggle between automatic and manual.
+Press W to move arms up and S to move down. */
+
 //----- Declaring global variables. -----
 
 int armAngle = 0; // Variable for the rotation of the arms.
 int angleChange = 5; // Variable to increment on the angle of the arm rotation.
 final int ANGLE_LIMIT = 135; // Variable for the limit of the arms rotation.
+boolean wave = false; // Boolean to check if waving arms.
 
 PImage bg; //Variable for background image.
 
@@ -19,19 +24,27 @@ void setup()
   frameRate(30); // Set 30 frames per second.
 }
 
-void draw()
+void draw() 
 {
   background(bg); // Set background image.
+  instructions(); // Draw instructions.
+  
   pushMatrix();
   translate(width/2, height/2); // Place robot on the center of screen.
   drawRobot(); // Call drawRobot function.
-  armAngle += angleChange; // Increment the angle of rotation.
 
-  if (armAngle > ANGLE_LIMIT || armAngle < 0) // If the arm has moved past its limit, reverse direction and set within limits.
-  {
-    angleChange = -angleChange; // Reverse direction of rotation.
+  if (wave) { // Check if wave is true and start to wave.
+  
     armAngle += angleChange; // Increment the angle of rotation.
+
+    if (armAngle > ANGLE_LIMIT || armAngle < 0) // If the arm has moved past its limit, reverse direction and set within limits.
+    {
+      angleChange = -angleChange; // Reverse direction of rotation.
+      armAngle += angleChange; // Increment the angle of rotation.
+    }
   }
+
+
   popMatrix();
 }
 
@@ -42,7 +55,7 @@ void draw()
 void drawRobot() //Draws the Robot.
 {
   noStroke(); //Remove all strokes.
-  
+
   //ARMS
   fill(200); // Set limb colour to light gray.
   drawLeftArm(); // Call drawLeftArm function.
@@ -70,12 +83,12 @@ void drawRobot() //Draws the Robot.
   rect(-5, -155, 10, 50); // anthena
   fill(75, 196, 232); // Set colour to blue.
   ellipse(0, -155, 20, 20); //anthena bulb
-  
+
   //HEAD AND BODY  
   fill(255, 194, 79); // Set body colour to yellow.
   ellipse(0, -75, 100, 100); // head
   rect(-50, -75, 100, 150); // body
-  
+
   //EYES
   fill(75, 196, 232);
   ellipse(-25, -90, 20, 20); // left eye
@@ -103,4 +116,3 @@ void drawRightArm() // Rotates and draws right arm.
   ellipse(0, 80, 30, 30); // right hand
   popMatrix();
 }
-

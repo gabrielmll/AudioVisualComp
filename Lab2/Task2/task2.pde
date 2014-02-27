@@ -1,3 +1,6 @@
+/* This program draws a new square each time it runs and now besides translating it also uses scaling
+to increase square sizes adding the scalingSpeed variable to the scaling variable. */
+
 //----- Declaring global variables. -----
 
 PVector position; //Variable for the position of the drawn squares.
