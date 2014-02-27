@@ -1,5 +1,10 @@
 /*
-Extension 1
+  LAB 3
+  Extension 1
+  
+  Three waves are shown on the screen.
+    You can control 2 of them with "qwer" and "asdf" from your keyboard.
+    The third wave is a sum of the 2 frists 
  */
 
 int amp1 = 30;
