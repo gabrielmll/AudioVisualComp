@@ -60,7 +60,6 @@ void updateValues() {
 
   location.add(direction);
 
-  println(direction);
   if ((direction.x < 1) && (direction.x > -1) &&
     (direction.y < 1) && (direction.y > -1)) {
     direction.x = 0;

@@ -11,7 +11,7 @@ class Particle {
   PImage sprite1;  // variable for bird sprite 1
   PImage sprite2;  // variable for bird sprite 2
 
-    float threshold = 10;
+    float threshold = 20;
 
   Particle(PVector pos) {
     location = new PVector(pos.x, pos.y);
