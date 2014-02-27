@@ -29,7 +29,7 @@ void setup() {
   v3 = new PVector(100, 100);
   v4 = new PVector(100, -100);
 
-  textureMode(NORMAL); mouseX
+  textureMode(NORMAL); 
 }
 
 // "infinite loop"
@@ -98,4 +98,3 @@ void drawImg() {
     spriteTimer = 0; // Resets timer when sprite reaches maximum time.
   }
 }
-
