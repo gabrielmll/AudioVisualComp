@@ -3,12 +3,18 @@
  Turn your sketch into 3D. You are already using the OPENGL
  renderer (P3D incorporates this), so all you need to do is
  add a z coordinate. 
- */
+*/
+
+//----- Declaring global variables. -----
 
 PImage img;  // variable for an image
 
 PVector v1, v2, v3, v4;  // shape vector variables
 PVector position = new PVector(100, 150); // Shape position
+
+
+
+//----- PROGRAM -----
 
 void setup() {
   size(600, 600, P3D);  // window size in a 3D engine
@@ -48,4 +54,3 @@ void setup() {
   vertex(v4.x, v4.y, v4.z, 1, 0);
   endShape(CLOSE);
 }
-

@@ -1,6 +1,13 @@
+/* This code draws shapes with more than 4 vertices using and array to store the vertices points. */
+
+//----- Declaring global variables. -----
+
 PVector[] v = new PVector[6];  // shape vector variables stored in an array
 
 PVector move = new PVector(300, 300);
+
+
+//----- PROGRAM -----
 
 void setup() {
   size(700, 700, P3D);  // window size in a 3D engine
@@ -48,4 +55,3 @@ void setup() {
 // "infinite loop"
 void draw() {
 }
-

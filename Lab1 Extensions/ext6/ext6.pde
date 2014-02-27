@@ -1,6 +1,9 @@
 /*
-  Extension 6. 
+  Extension 6.
+  Grid of vertices with customizable Y heights by draggin each one with the mouse.
  */
+
+//----- Declaring global variables. -----
 
 PVector v[] = new PVector[1600];  // shape vector variables
 int quad = 35;  // size of each quadrant
@@ -20,6 +23,9 @@ float screen2DX = 0;  // Interpretate 2D X-click on 3D enviornment
 float screen2DY = 0; // Interpretate 2D Y-click on 3D enviornment
 boolean mouseClick = false; // If mouse is clicked, than true
 int[] selectedVertice = new int[2]; // Which vertice is selected?
+
+
+//----- PROGRAM -----
 
 void setup() {
   size(1000, 600, P3D);  // window size in a 3D engine
@@ -160,4 +166,3 @@ void initHeightY() {
 void mouseReleased() {
   mouseClick = false;
 }
-

@@ -1,11 +1,18 @@
 /*
-  Extension 5. 
- */
+  Extension 5.
+ Creating 3D landscapes using a grid of vertices by drawing quads in an array. 
+*/
 
-PVector v[] = new PVector[1600];  // shape vector variables
-int quad = 35;  // size of each quadrant
+//----- Declaring global variables. -----
 
-int numOfQuads = 20; // Variable for resolution
+PVector v[] = new PVector[1600];  // Shape vector variables.
+int quad = 35;  // Size of each quadrant.
+
+int numOfQuads = 20; // Variable for resolution.
+
+
+
+//----- PROGRAM -----
 
 void setup() {
   size(1000, 600, P3D);  // window size in a 3D engine
@@ -64,4 +71,3 @@ float heightY(float y1, float y2)
  // return 50*sin(radians(ang));
   return noise(y1, y2)*20;
 }
-

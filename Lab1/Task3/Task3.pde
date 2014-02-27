@@ -1,20 +1,26 @@
-PImage img;  // variable for an image
+/* This code shows how to texture map a shape. */
+
+//----- Declaring global variables. -----
+
+PImage img;  // Variable for the image.
+
+//----- PROGRAM -----
 
 void setup() {
-  // 1.
+  //  1.
   //  Setting the size of the window in a 3D engine
   size(1024, 1024, P3D);
 
-  img = loadImage("arara.jpg");  // loading an image to the image variable
+  img = loadImage("arara.jpg");  // Loading an image to the image variable.
 
-    // 2.
-  //   Adding textureMode(NORMAL)
+  //  2.
+  //  Adding textureMode(NORMAL).
   textureMode(NORMAL);
 
 
   beginShape();
   // 3.
-  //  Adding the image as a texture of the shape
+  //  Adding the image as a texture of the shape.
   texture(img);
   // 4.
   //  Each vertice of the shape
@@ -34,5 +40,5 @@ void setup() {
   vertex(650, 500, 0, 0);
   vertex(650, 100, 0, 1);
   endShape(CLOSE);
+  
 }
-

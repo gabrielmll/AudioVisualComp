@@ -1,5 +1,15 @@
-PImage img;  // variable for an image
+/* This code draws an image from the img variable on the window. */
 
-img = loadImage("arara.jpg");  // loading an image to the image variable
+//----- Declaring global variables. -----
 
-image(img, 0, 0);  // adding the image setted in "img" variable to the screen
+PImage img;  // Variable for the image.
+
+//----- PROGRAM -----
+
+void setup() {
+  
+  img = loadImage("arara.jpg");  // Loading an image to the img variable.
+  size(img.width, img.height); // Setting the window size to the size of the image.
+  image(img, 0, 0);  // Adding the image setted in the "img" variable to the screen.
+
+}
