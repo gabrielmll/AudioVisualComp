@@ -1,11 +1,13 @@
 /*
   Extension 6.
-  Grid of vertices with customizable Y heights by draggin each one with the mouse.
+ Grid of vertices with customizable Y heights by draggin each one with the mouse.
  */
 
 //----- Declaring global variables. -----
 
 PVector v[] = new PVector[1600];  // shape vector variables
+PImage texture;
+
 int quad = 35;  // size of each quadrant
 
 int numOfQuads = 20; // Variable for resolution
@@ -31,6 +33,9 @@ void setup() {
   size(1000, 600, P3D);  // window size in a 3D engine
 
   initHeightY();  // sets all values of matrix "valueY" to 0
+
+  texture = loadImage("grass.jpg");
+  textureMode(NORMAL);
 }
 
 void draw() {
@@ -66,14 +71,37 @@ void draw() {
     }
   }
 
+  // variables for texture mapping
+  float um = 0;
+  float vm = 0;
   // create a shape
   noFill();
   beginShape(QUAD);
+  texture(texture);
 
   // declare the shape vertices using the vectors
   for (int k = 0; k < numOfQuads*numOfQuads*4; k++) {
 
-    vertex(v[k].x, v[k].y, v[k].z);
+    switch(k % 4) {
+    case 0:
+      um = 0; 
+      vm = 0;
+      break;
+    case 1:
+      um = 1; 
+      vm = 0;
+      break;
+    case 2:
+      um = 1; 
+      vm = 1;
+      break;
+    case 3:
+      um = 0; 
+      vm = 1;
+      break;
+    }
+
+    vertex(v[k].x, v[k].y, v[k].z, um, vm);
   }
 
   endShape();
@@ -166,3 +194,4 @@ void initHeightY() {
 void mouseReleased() {
   mouseClick = false;
 }
+
